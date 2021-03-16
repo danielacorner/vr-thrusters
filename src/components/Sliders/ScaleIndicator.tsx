@@ -1,7 +1,7 @@
 import React from "react";
 import { Line, Text } from "@react-three/drei";
 import { INITIAL_CEILING_HEIGHT, useStore } from "../../store";
-import { useIsTabletOrLarger } from "../../utils/constants";
+import { useIsTabletOrLarger, WORLD_RADIUS } from "../../utils/constants";
 
 type Tick = {
   name: string;
@@ -12,10 +12,9 @@ type Tick = {
 export function ScaleIndicator() {
   const ceilingHeight = useStore((s) => s.ceilingHeight);
   const ceilingHeightMultiplier = ceilingHeight / INITIAL_CEILING_HEIGHT;
-  const wr = useStore((s) => s.worldRadius * 0.999);
+  const wr = WORLD_RADIUS * 0.999;
   const wd = 2 * wr;
   const scale = useStore((s) => s.scale);
-  const worldRadius = useStore((s) => s.worldRadius);
   const commonProps = { color: "hsla(0,0%,80%)" };
   const scaled = scale / 0.002 / 4;
   // create 10 big ticks
@@ -102,8 +101,8 @@ export function ScaleIndicator() {
             (tru, cur) => tru && typeof cur === "number",
             true
           );
-          const isTickBelowCeiling = y < worldRadius * ceilingHeightMultiplier;
-          const isTickAboveFloor = y > -worldRadius * 0.97;
+          const isTickBelowCeiling = y < WORLD_RADIUS * ceilingHeightMultiplier;
+          const isTickAboveFloor = y > -WORLD_RADIUS * 0.97;
 
           return areAllNumbers && isTickBelowCeiling && isTickAboveFloor;
         })
@@ -152,7 +151,7 @@ export function ScaleIndicator() {
   );
 }
 function EdgeLines({ commonProps }) {
-  const wr = useStore((s) => s.worldRadius * 0.99);
+  const wr = WORLD_RADIUS * 0.99;
 
   return (
     <>

@@ -26,7 +26,6 @@ export function Lighting() {
 
 // function SpotLightOnSelectedProtein() {
 //   const selectedProtein = useStore((s) => s.selectedProtein);
-//   const worldRadius = useStore((s) => s.worldRadius);
 //   const scale = useStore((s) => s.scale);
 //   const set = useStore((s) => s.set);
 //   const [selectedCoords, setSelectedCoords] = useState({ x: 0, y: 0, z: 0 });
@@ -74,7 +73,7 @@ export function Lighting() {
 //         angle={0.12}
 //         intensity={1.3}
 //         penumbra={0.2}
-//         distance={worldRadius * 15}
+//         distance={WORLD_RADIUS * 15}
 //         position={[
 //           selectedCoords.x,
 //           selectedCoords.y,

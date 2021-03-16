@@ -4,17 +4,16 @@ import * as THREE from "three";
 import { getRandStartPosition } from "../Shapes/particleUtils";
 import { useStore } from "../../store";
 import { useChangeVelocityWhenTemperatureChanges } from "../Physics/useChangeVelocityWhenTemperatureChanges";
+import { WORLD_RADIUS } from "../../utils/constants";
 const RADIUS = 0.05;
 const NUM_INSTANCES = 50;
 
-export function Water() {
-  const worldRadius = useStore((state) => state.worldRadius);
-  const selectedProtein = useStore((state) => state.selectedProtein);
+export function InstancedSpheres() {
   const mass = 18.0153 / 1000; /* 18.0153 daltons */
   const paused = useStore((s) => s.paused);
   const [ref, api] = useSphere((index) => ({
     mass: paused ? 0 : mass,
-    position: getRandStartPosition(worldRadius),
+    position: getRandStartPosition(WORLD_RADIUS),
     args: 1,
     material: {
       restitution: 0.0001,
@@ -38,7 +37,7 @@ export function Water() {
       <meshStandardMaterial
         color={new THREE.Color("#6f6dda")}
         transparent={true}
-        opacity={selectedProtein ? 0.1 : 0.3}
+        opacity={0.3}
       />
     </instancedMesh>
   );

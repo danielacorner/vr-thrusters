@@ -13,7 +13,6 @@ export function FloatingHtmlOverlay({
   virusHpPct,
   iconIdx = null,
 }) {
-  const showHp = useStore((s) => s.showHp);
   const [mounted, setMounted] = useState(false);
   useMount(() => {
     setTimeout(() => {
@@ -23,7 +22,7 @@ export function FloatingHtmlOverlay({
   });
   const scalePct = useScalePercent();
 
-  return showHp ? (
+  return (
     <Html>
       <HtmlOverlayStyles
         {...{
@@ -41,7 +40,7 @@ export function FloatingHtmlOverlay({
         </div>
       </HtmlOverlayStyles>
     </Html>
-  ) : null;
+  );
 }
 
 type HtmlOverlayProps = {

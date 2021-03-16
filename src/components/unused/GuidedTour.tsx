@@ -41,10 +41,9 @@ const GuidedTour = () => {
 export default GuidedTour;
 
 function LinkToGithub() {
-  const selectedProtein = useStore((s) => s.selectedProtein);
   return (
     <a
-      href="https://github.com/danielacorner/viruses"
+      href="https://github.com/danielacorner/3d-starter"
       target="_blank"
       rel="noopener noreferrer"
     >
@@ -53,7 +52,7 @@ function LinkToGithub() {
           size="small"
           style={{
             position: "fixed",
-            opacity: selectedProtein ? 0.2 : 0.6,
+            opacity: 0.6,
             bottom: 8,
             left: 8,
             transform: "scale(0.9)",

@@ -6,7 +6,6 @@ import { OrthographicCamera, useCamera } from "@react-three/drei";
 
 /** based on Viewcube https://codesandbox.io/s/react-three-fiber-viewcube-py4db */
 export function SelectedParticleDisplay() {
-  const selectedProtein = useStore((s) => s.selectedProtein);
   // const selectedGltf = useGLTF(selectedProtein?.pathToGLTF);
   const scale = useStore((s) => s.scale) * 50;
 
@@ -25,7 +24,7 @@ export function SelectedParticleDisplay() {
     gl.clearDepth();
     gl.render(virtualScene, virtualCam.current);
   }, 1);
-  const Component = selectedProtein?.Component || (() => <mesh />);
+  const Component = () => <mesh />;
 
   return createPortal(
     <>

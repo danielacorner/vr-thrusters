@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useControl } from "react-three-gui";
 import { SingleParticle, useShouldRenderParticle } from "./SingleParticle";
 import { getRandStartPosition } from "../Shapes/particleUtils";
-import { useStore } from "../../store";
+import { WORLD_RADIUS } from "../../utils/constants";
 
 /** a set of proteins of the same species (i.e. 3d model) -- each species of protein can be rendered multiple times */
 const ParticleGroup = (props) => {
@@ -15,17 +15,14 @@ const ParticleGroup = (props) => {
   });
   const numParticles = Math.ceil(numParticlesFloat);
 
-  const worldRadius = useStore((state) => state.worldRadius);
-
   const [positionsArray, setPositionsArray] = useState(() =>
-    [...new Array(numParticles)].map(() => getRandStartPosition(worldRadius))
+    [...new Array(numParticles)].map(() => getRandStartPosition(WORLD_RADIUS))
   );
 
   useRenderOnlyNewParticlesWhenCreated(
     numParticles,
     positionsArray,
-    setPositionsArray,
-    worldRadius
+    setPositionsArray
   );
 
   return (
@@ -57,8 +54,7 @@ function useRenderOnlyNewParticlesWhenCreated(
   positionsArray: [number, number, number][],
   setPositionsArray: React.Dispatch<
     React.SetStateAction<[number, number, number][]>
-  >,
-  worldRadius: number
+  >
 ) {
   useEffect(() => {
     const numNewParticles = numParticles - positionsArray.length;
@@ -72,9 +68,9 @@ function useRenderOnlyNewParticlesWhenCreated(
     } else if (numNewParticles > 0) {
       // or populate any missing
       const newPositionsArray = [...new Array(numNewParticles)].map(() =>
-        getRandStartPosition(worldRadius)
+        getRandStartPosition(WORLD_RADIUS)
       );
       setPositionsArray((prev) => [...prev, ...newPositionsArray]);
     }
-  }, [numParticles, positionsArray, worldRadius, setPositionsArray]);
+  }, [numParticles, positionsArray, setPositionsArray]);
 }

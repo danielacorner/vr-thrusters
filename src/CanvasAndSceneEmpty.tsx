@@ -5,7 +5,7 @@ import { Canvas, useFrame } from "react-three-fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Lighting } from "./components/Scene/Lighting";
 import { Physics } from "@react-three/cannon";
-import { Water } from "./components/Scene/Water";
+import { InstancedSpheres } from "./components/Scene/InstancedSpheres";
 import { PHYSICS_PROPS } from "./utils/PHYSICS_PROPS";
 import { Walls } from "./components/Scene/Walls";
 import { ScaleIndicator } from "./components/Sliders/ScaleIndicator";
@@ -41,7 +41,7 @@ export function CanvasAndSceneEmpty({
             rotation={[0, started ? Math.PI / 2 : -Math.PI, 0]}
             scale={isLoadingIndicator ? [0.75, 0.75, 0.75] : [1, 1, 1]}
           >
-            <Water />
+            <InstancedSpheres />
             {children}
             <Walls />
             <ScaleIndicator />

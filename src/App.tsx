@@ -1,5 +1,4 @@
 import React, { Suspense, useEffect } from "react";
-import Tooltip from "./components/SelectedParticle/SelectedParticleTooltip";
 import { Button, Typography } from "@material-ui/core";
 import WarningOutlined from "@material-ui/icons/WarningOutlined";
 import { CanvasAndSceneEmpty } from "./CanvasAndSceneEmpty";
@@ -22,7 +21,6 @@ function App() {
       <LoadingIndicator />
       <LazyLoadedScene />
       <div id="memoryStats"></div>
-      <Tooltip />
       {/* <GuidedTour /> */}
       <SaveControlsSettingsToLocalStorage />
     </div>
@@ -109,14 +107,7 @@ function LazyLoadedScene() {
       >
         <div className="title">
           <Typography style={{ textAlign: "center" }} variant="h3">
-            <div className="left">
-              virus
-              <div className="logo">
-                <div className="l">🦠</div>
-                <div className="r">⚡</div>
-              </div>
-            </div>
-            <div className="right">Thunderdome</div>
+            3d-starter
           </Typography>
           <div className="requirements">
             <WarningOutlined />
@@ -139,9 +130,12 @@ function SaveControlsSettingsToLocalStorage() {
   const set = useStore((s) => s.set);
   const soundOn = useStore((s) => s.soundOn);
 
-  const [settings, setSettings] = useLocalStorageState("settings", {
-    soundOn,
-  });
+  const [settings, setSettings] = useLocalStorageState(
+    "settings",
+    JSON.stringify({
+      soundOn,
+    })
+  );
 
   // when app mounts, retrieve settings from local storage
   useMount(() => {

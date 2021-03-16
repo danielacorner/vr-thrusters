@@ -6,6 +6,7 @@ import * as THREE from "three";
 import { useGLTF } from "@react-three/drei";
 import { getRandStartPosition } from "../particleUtils";
 import { useStore } from "../../../store";
+import { WORLD_RADIUS } from "../../../utils/constants";
 // import * as antibody from "./models/1bv1/scene.gltf";
 
 const dummy = new THREE.Object3D();
@@ -22,15 +23,13 @@ const Particle = ({
   jittery,
   ...rest
 }) => {
-  const worldRadius = useStore((state) => state.worldRadius);
-
   // https://codesandbox.io/s/may-with-60fps-your-web-site-run-xj31x?from-embed=&file=/src/index.js:297-1112
 
   const instancedRef = useRef();
   const [sphereRef, sphereApi] = useSphere((index) => ({
     // rotation: [-Math.PI / 2, 0, 0],
     mass: 1,
-    position: getRandStartPosition(worldRadius),
+    position: getRandStartPosition(WORLD_RADIUS),
     args: 1, // ? https://codesandbox.io/s/r3f-cannon-instanced-physics-devf8?file=/src/index.js
   }));
   // random start positions: instanced
@@ -40,7 +39,7 @@ const Particle = ({
   //   }
   //   let i = 0;
   //   for (let idx = 0; idx < numParticles; idx++) {
-  //     const [x, y, z] = getRandStartPosition( worldRadius);
+  //     const [x, y, z] = getRandStartPosition( WORLD_RADIUS);
   //     dummy.position.x = x;
   //     dummy.position.x = y;
   //     dummy.position.x = z;
@@ -59,7 +58,7 @@ const Particle = ({
   //   if (instanced) {
   //     return;
   //   }
-  //   const [x, y, z] = getRandStartPosition(worldRadius);
+  //   const [x, y, z] = getRandStartPosition(WORLD_RADIUS);
   //   // https://codesandbox.io/s/r3f-cannon-instanced-physics-devf8
   //   sphereApi.position.set(x, y, z);
   // });

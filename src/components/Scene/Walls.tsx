@@ -1,5 +1,6 @@
 import React from "react";
 import { useStore } from "../../store";
+import { WORLD_RADIUS } from "../../utils/constants";
 import { Plane } from "../Shapes/Plane";
 
 // https://www.npmjs.com/package/nice-color-palettes
@@ -7,51 +8,50 @@ import { Plane } from "../Shapes/Plane";
 // const palette = niceColors[6]; // e.g. => [ "#69d2e7", "#a7dbd8", "#e0e4cc", "#f38630", "#fa6900" ]
 
 export function Walls() {
-  const worldRadius = useStore((state) => state.worldRadius);
   const ceilingHeight = useStore((state) => state.ceilingHeight);
   const walls = [
     {
       name: "in front",
-      width: worldRadius * 2,
+      width: WORLD_RADIUS * 2,
       height: ceilingHeight,
       rotation: [0 * Math.PI, 0, 0],
-      position: [0, ceilingHeight / 2 - worldRadius, -worldRadius],
+      position: [0, ceilingHeight / 2 - WORLD_RADIUS, -WORLD_RADIUS],
     },
     {
       reflect: true,
       name: "behind", // (camera-side)
-      width: worldRadius * 2,
+      width: WORLD_RADIUS * 2,
       height: ceilingHeight,
       rotation: [0, -1 * Math.PI, 0],
-      position: [0, ceilingHeight / 2 - worldRadius, worldRadius],
+      position: [0, ceilingHeight / 2 - WORLD_RADIUS, WORLD_RADIUS],
     },
     {
       name: "left",
-      width: worldRadius * 2,
+      width: WORLD_RADIUS * 2,
       height: ceilingHeight,
       rotation: [0, 0.5 * Math.PI, 0],
-      position: [-worldRadius, ceilingHeight / 2 - worldRadius, 0],
+      position: [-WORLD_RADIUS, ceilingHeight / 2 - WORLD_RADIUS, 0],
     },
     {
       name: "right",
-      width: worldRadius * 2,
+      width: WORLD_RADIUS * 2,
       height: ceilingHeight,
       rotation: [0, -0.5 * Math.PI, 0],
-      position: [worldRadius, ceilingHeight / 2 - worldRadius, 0],
+      position: [WORLD_RADIUS, ceilingHeight / 2 - WORLD_RADIUS, 0],
     },
     {
       name: "floor",
-      width: worldRadius * 2,
-      height: worldRadius * 2,
+      width: WORLD_RADIUS * 2,
+      height: WORLD_RADIUS * 2,
       rotation: [-0.5 * Math.PI, 0, 0],
-      position: [0, -worldRadius, 0],
+      position: [0, -WORLD_RADIUS, 0],
     },
     {
       name: "ceiling",
-      width: worldRadius * 2,
-      height: worldRadius * 2,
+      width: WORLD_RADIUS * 2,
+      height: WORLD_RADIUS * 2,
       rotation: [0.5 * Math.PI, 0, 0],
-      position: [0, ceilingHeight - worldRadius, 0],
+      position: [0, ceilingHeight - WORLD_RADIUS, 0],
     },
   ];
 
