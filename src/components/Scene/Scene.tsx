@@ -1,8 +1,7 @@
-import React, { Suspense, useEffect } from "react";
+import React, { Suspense } from "react";
 import { Physics } from "@react-three/cannon";
 import { OrbitControls } from "@react-three/drei";
 import { Lighting } from "./Lighting";
-import { ScaleIndicator } from "../Sliders/ScaleIndicator";
 import { useAudioTrack } from "../music/useAudioTrack";
 import { a } from "react-spring/three";
 
@@ -22,7 +21,7 @@ function PhysicsSceneMovable() {
   return (
     <a.group>
       <Physics>
-        <ScaleIndicator />
+        <mesh />
       </Physics>
     </a.group>
   );

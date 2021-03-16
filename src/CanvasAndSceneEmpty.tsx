@@ -41,10 +41,8 @@ export function CanvasAndSceneEmpty({
             rotation={[0, started ? Math.PI / 2 : -Math.PI, 0]}
             scale={isLoadingIndicator ? [0.75, 0.75, 0.75] : [1, 1, 1]}
           >
-            <InstancedSpheres />
             {children}
             <Walls />
-            <ScaleIndicator />
           </mesh>
         </Physics>
       </SpinIfLoadingIndicator>

@@ -1,5 +1,5 @@
 import create from "zustand";
-import { MAX_SCALE } from "./utils/constants";
+import { MAX_SCALE, WORLD_RADIUS } from "./utils/constants";
 
 type GlobalStateType = {
   /** temperature = particle velocity */
@@ -25,7 +25,7 @@ type GlobalStateType = {
 const startsStarted = false && process.env.NODE_ENV === "development";
 
 export const INITIAL_PLAYER_HP = 4000;
-export const INITIAL_CEILING_HEIGHT = 10;
+export const INITIAL_CEILING_HEIGHT = WORLD_RADIUS * 2;
 
 export function getSettingsFromLS() {
   const settings = window.localStorage.getItem("settings");
