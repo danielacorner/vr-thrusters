@@ -43,7 +43,7 @@ export default GuidedTour;
 function LinkToGithub() {
   return (
     <a
-      href="https://github.com/danielacorner/3d-starter"
+      href="https://github.com/danielacorner/vr-thrusters"
       target="_blank"
       rel="noopener noreferrer"
     >
