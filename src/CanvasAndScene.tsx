@@ -3,9 +3,7 @@ import { Controls } from "react-three-gui";
 import Scene from "./components/Scene/Scene";
 import { useWindowSize } from "./utils/hooks";
 import * as THREE from "three";
-import TopControls from "./components/Controls/TopControls";
 
-import SideControls from "./components/Controls/SideControls";
 import { BREAKPOINT_TABLET, INITIAL_CAMERA_POSITION } from "./utils/constants";
 
 export default function CanvasAndScene({ renderProteins = true }) {
@@ -34,8 +32,6 @@ export default function CanvasAndScene({ renderProteins = true }) {
         ) : null}
       </Controls.Provider>
       {/* <HideHpControls /> */}
-      <SideControls />
-      <TopControls />
     </>
   );
 }

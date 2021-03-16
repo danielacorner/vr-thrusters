@@ -2,10 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useMount } from "../../utils/utils";
 import { Html } from "@react-three/drei";
 import styled from "styled-components/macro";
-import { PROTEIN_TYPES } from "../../utils/PROTEINS";
 import { useStore } from "../../store";
-import { ICONS } from "../Game/WAVES";
-import Block from "@material-ui/icons/GpsFixed";
 import { useScalePercent } from "../useScalePercent";
 import { useSpring, animated } from "react-spring";
 
@@ -16,7 +13,6 @@ export function FloatingHtmlOverlay({
   virusHpPct,
   iconIdx = null,
 }) {
-  const Icon = iconIdx || iconIdx === 0 ? ICONS[iconIdx] : null;
   const showHp = useStore((s) => s.showHp);
   const [mounted, setMounted] = useState(false);
   useMount(() => {
@@ -25,12 +21,7 @@ export function FloatingHtmlOverlay({
       setMounted(true);
     }, 1);
   });
-  const isAntibody = type === PROTEIN_TYPES.antibody;
-  const isVirus = type === PROTEIN_TYPES.virus;
   const scalePct = useScalePercent();
-
-  // when virusHp changes, highlight the particle
-  const springDamageAnimation = useSpringDamageAnimation(isVirus, virusHpPct);
 
   return showHp ? (
     <Html>
@@ -40,25 +31,10 @@ export function FloatingHtmlOverlay({
           lifespan,
           type,
           virusHpPct,
-          isAntibody,
-          isVirus,
           scalePct,
         }}
       >
-        <animated.div
-          className="damageAnimation"
-          style={springDamageAnimation}
-        />
-        {Icon ? (
-          <div className="icon">
-            <Icon />
-            {isAntibody ? (
-              <div className="blockIcon">
-                <Block />
-              </div>
-            ) : null}
-          </div>
-        ) : null}
+        <animated.div className="damageAnimation" />
         {/* <div className="name">{name}</div> */}
         <div className="hpBar">
           <div className="hp" />
@@ -69,7 +45,6 @@ export function FloatingHtmlOverlay({
 }
 
 type HtmlOverlayProps = {
-  type: keyof typeof PROTEIN_TYPES;
   virusHpPct: number;
   lifespan: number;
   mounted: boolean;
@@ -141,53 +116,4 @@ const HtmlOverlayStyles = styled.div<HtmlOverlayProps>`
     padding-bottom: 0.5em;
     text-align: center;
   }
-  .hpBar {
-    width: ${HP_BAR_WIDTH}px;
-    height: ${HP_BAR_HEIGHT}px;
-    outline: 1px solid grey;
-    .hp {
-      width: 100%;
-      height: 100%;
-      background: ${(p) =>
-        p.type === PROTEIN_TYPES.antibody
-          ? "cornflowerblue"
-          : p.type === PROTEIN_TYPES.virus
-          ? "limegreen"
-          : "none"};
-      transition: transform ${(p) => p.lifespan}ms linear;
-      transform: scaleX(
-        ${(p) => {
-          return p.type === PROTEIN_TYPES.antibody && p.mounted
-            ? 0
-            : p.type === PROTEIN_TYPES.virus && p.virusHpPct
-            ? p.virusHpPct
-            : 1;
-        }}
-      );
-      transform-origin: left;
-    }
-  }
 `;
-
-/** when virusHp changes, highlight the particle */
-function useSpringDamageAnimation(isVirus: boolean, virusHpPct: any) {
-  const [highlighted, setHighlighted] = useState(false);
-  useEffect(() => {
-    let timer;
-    if (isVirus && virusHpPct !== 1) {
-      setHighlighted(true);
-      timer = setTimeout(() => {
-        setHighlighted(false);
-      }, 200);
-    }
-    return () => {
-      clearTimeout(timer);
-    };
-  }, [virusHpPct, isVirus]);
-
-  const springDamageAnimation = useSpring({
-    opacity: highlighted ? 1 : 0,
-    immediate: highlighted,
-  });
-  return springDamageAnimation;
-}

@@ -1,8 +1,6 @@
 import React from "react";
 import { useStore } from "../../store";
 import { Plane } from "../Shapes/Plane";
-import { PlayerHpBarAndFloor } from "../Game/PlayerHpBarAndFloor";
-import { IcosahedronBackground } from "./IcosahedronBackground";
 
 // https://www.npmjs.com/package/nice-color-palettes
 // https://raw.githubusercontent.com/Jam3/nice-color-palettes/HEAD/visualize/1000.png
@@ -62,15 +60,6 @@ export function Walls() {
       {walls.map((props, idx) => (
         <Plane {...props} key={JSON.stringify(props.position)} />
       ))}
-      <IcosahedronBackground />
-      <PlayerHpBarAndFloor
-        {...{
-          name: "floor",
-          width: worldRadius * 2,
-          height: worldRadius * 2,
-          rotation: [-0.5 * Math.PI, 0, 0],
-        }}
-      />
     </>
   );
 }

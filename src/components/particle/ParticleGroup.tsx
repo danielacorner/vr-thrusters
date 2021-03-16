@@ -3,15 +3,14 @@ import { useControl } from "react-three-gui";
 import { SingleParticle, useShouldRenderParticle } from "./SingleParticle";
 import { getRandStartPosition } from "../Shapes/particleUtils";
 import { useStore } from "../../store";
-import { PROTEIN_TYPES } from "../../utils/PROTEINS";
 
 /** a set of proteins of the same species (i.e. 3d model) -- each species of protein can be rendered multiple times */
-const ProteinGroup = (props) => {
+const ParticleGroup = (props) => {
   const numParticlesFloat: number = useControl(props.name, {
     group: `Particles - ${props.type}`,
     type: "number",
     min: 0,
-    max: props.type === PROTEIN_TYPES.antibody ? 100 : 20,
+    max: 100,
     value: 1,
   });
   const numParticles = Math.ceil(numParticlesFloat);
@@ -48,7 +47,7 @@ function SingleParticleIfVisibleAtScale(props) {
   return shouldRender ? <SingleParticle {...props} /> : null;
 }
 
-export default ProteinGroup;
+export default ParticleGroup;
 
 /** change the positions array when numParticles changes;
  * do this manually so that existing particles don't re-render & maintain their positions

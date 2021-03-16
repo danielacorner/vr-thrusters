@@ -8,10 +8,7 @@ import { LoadingIndicator } from "./components/Scene/LoadingIndicator";
 import { useMount } from "./utils/utils";
 import { render } from "react-dom";
 import MemoryStats from "react-memorystats";
-import { BtnStartNextWave } from "./components/Scene/BtnStartNextWave";
-import { CellAndAntibodyButtons } from "./components/CellAndAntibodyButtons/CellAndAntibodyButtons";
 import { useLocalStorageState } from "./utils/useLocalStorageState";
-import { AttributionLinks } from "./AttributionLinks";
 import styled from "styled-components/macro";
 function App() {
   useMount(() => {
@@ -26,10 +23,7 @@ function App() {
       <LazyLoadedScene />
       <div id="memoryStats"></div>
       <Tooltip />
-      <BtnStartNextWave />
-      <CellAndAntibodyButtons />
       {/* <GuidedTour /> */}
-      <AttributionLinks />
       <SaveControlsSettingsToLocalStorage />
     </div>
   );
