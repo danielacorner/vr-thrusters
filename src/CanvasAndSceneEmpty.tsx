@@ -5,10 +5,8 @@ import { Canvas, useFrame } from "react-three-fiber";
 import { OrbitControls } from "@react-three/drei";
 import { Lighting } from "./components/Scene/Lighting";
 import { Physics } from "@react-three/cannon";
-import { InstancedSpheres } from "./components/Scene/InstancedSpheres";
 import { PHYSICS_PROPS } from "./utils/PHYSICS_PROPS";
 import { Walls } from "./components/Scene/Walls";
-import { ScaleIndicator } from "./components/Sliders/ScaleIndicator";
 import { useStore } from "./store";
 
 export function CanvasAndSceneEmpty({
